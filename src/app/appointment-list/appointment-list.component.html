@@ -6,8 +6,9 @@
 
 <ul>
 
-  <li *ngFor="let appointment of appointments">
+  <li *ngFor="let appointment of appointments;index as i">
     {{ appointment.id }} {{ appointment.title }} {{ appointment.date | date:'dd.MM.yyy' }}
+    <button (click)="deleteAppointment(i)">Delete</button>
   </li>
 
 </ul>
