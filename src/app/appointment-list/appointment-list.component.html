@@ -3,3 +3,11 @@
   <input [(ngModel)]="newAppointmentDate" type="date" placeholder="Appointment Date">
   <button (click)="addAppointment()">Add</button>
 </div>
+
+<ul>
+
+  <li *ngFor="let appointment of appointments">
+    {{ appointment.id }} {{ appointment.title }} {{ appointment.date | date:'dd.MM.yyy' }}
+  </li>
+
+</ul>
