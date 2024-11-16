@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Appointment} from '../models/appointment';
+import {OnInit} from "@angular/core";
 
 @Component({
   selector: 'app-appointment-list',
@@ -8,10 +9,17 @@ import {Appointment} from '../models/appointment';
 })
 
 
-export class AppointmentListComponent {
+export class AppointmentListComponent implements OnInit {
+
+
   newAppointmentTitle: string = "";
   newAppointmentDate: Date = new Date();
   appointments: Appointment[] = []
+
+  ngOnInit() {
+    let savedAppointments = localStorage.getItem("appointments");
+    this.appointments = savedAppointments ? JSON.parse(savedAppointments) : []
+  }
 
   // logic
 
@@ -27,6 +35,8 @@ export class AppointmentListComponent {
       this.newAppointmentTitle = "";
       this.newAppointmentDate = new Date();
       alert(this.appointments.length);
+
+      localStorage.setItem("appointments", JSON.stringify(this.appointments));
     }
 
   }
@@ -35,7 +45,7 @@ export class AppointmentListComponent {
 
   deleteAppointment(index: number) {
     this.appointments.splice(index, 1);
-
+    localStorage.setItem("appointments", JSON.stringify(this.appointments));
   }
 
 }
